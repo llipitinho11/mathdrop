@@ -65,5 +65,6 @@ export const LINES_PER_LEVEL = 10;
 
 export const SCORE_PER_LINE = [0, 100, 300, 500, 800]; // Score for 0, 1, 2, 3, 4 lines cleared
 
-export const DUO_MODE_TIME_LIMIT = 30; // seconds
+export const DUO_MODE_TIME_LIMIT = 60; // seconds
 export const DUO_MODE_FALL_SPEED = INITIAL_FALL_SPEED; // Fixed speed for duo mode, can be adjusted
+

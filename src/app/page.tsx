@@ -61,7 +61,7 @@ export default function BlockDropPage() {
             </div>
             <div className="flex items-center space-x-3 p-3 bg-background/50 rounded-md hover:bg-background/70 transition-colors">
               <RadioGroupItem value="duo" id="mode-duo" className="border-primary text-primary focus:ring-primary"/>
-              <Label htmlFor="mode-duo" className="text-lg cursor-pointer">Modo Competição (30s)</Label>
+              <Label htmlFor="mode-duo" className="text-lg cursor-pointer">Modo Competição (60s)</Label>
             </div>
           </RadioGroup>
           <Button 
@@ -115,3 +115,4 @@ export default function BlockDropPage() {
     </div>
   );
 }
+
