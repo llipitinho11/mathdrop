@@ -10,13 +10,13 @@ interface ScoreDisplayProps {
 }
 
 const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ score, level, linesCleared, nextPiece }) => {
-  const previewCellSize = '8px sm:10px md:12px lg:16px'; // Responsive cell size for preview
+  const previewCellSize = 'max(1.5vw, 10px)'; // Adjusted minimum size
 
   return (
-    <div className="p-1 space-y-1 text-foreground bg-card rounded-lg shadow-md border sm:p-2 sm:space-y-2 md:p-3 md:space-y-3 lg:p-4 lg:space-y-4" style={{borderColor: BORDER_COLOR}}>
+    <div className="p-1 space-y-1 text-foreground bg-card rounded-lg shadow-md border sm:p-2 md:p-3 lg:p-4 w-full max-w-[100px] sm:max-w-[120px] md:max-w-[150px]" style={{borderColor: BORDER_COLOR}}>
       <div>
-        <h3 className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold">Pontuação</h3>
-        <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-accent font-bold">{score}</p>
+        <h3 className="text-[0.6rem] sm:text-xs md:text-sm font-semibold">Pontuação</h3>
+        <p className="text-xs sm:text-sm md:text-base text-accent font-bold">{score}</p>
       </div>
       <div className="hidden lg:block">
         <h3 className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold">Nível</h3>
@@ -27,30 +27,30 @@ const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ score, level, linesCleared,
         <p className="text-sm sm:text-base md:text-xl lg:text-2xl text-accent font-bold">{linesCleared}</p>
       </div>
       <div>
-        <h3 className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold">Próximo</h3>
+        <h3 className="text-[0.6rem] sm:text-xs font-semibold">Próximo</h3>
         {nextPiece && (
           <div
-            className="grid border rounded"
+            className="grid border rounded" // Container grid still has a border
             style={{
               gridTemplateColumns: `repeat(${nextPiece.matrix[0].length}, ${previewCellSize})`,
               gridTemplateRows: `repeat(${nextPiece.matrix.length}, ${previewCellSize})`,
-              width: `calc(${nextPiece.matrix[0].length} * ${previewCellSize} + 2px)`,
-              height: `calc(${nextPiece.matrix.length} * ${previewCellSize} + 2px)`,
+              width: `calc(${nextPiece.matrix[0].length} * (${previewCellSize}) + 2px)`,
+              height: `calc(${nextPiece.matrix.length} * (${previewCellSize}) + 2px)`,
               borderColor: BORDER_COLOR,
               backgroundColor: EMPTY_CELL_COLOR,
-              marginTop: '0.125rem sm:0.25rem md:0.5rem'
+              marginTop: '0.125rem'
             }}
           >
             {nextPiece.matrix.map((row, rIdx) =>
               row.map((cell, cIdx) => (
                 <div
                   key={`next-${rIdx}-${cIdx}`}
-                  className="border"
+                  // Removed className="border" from individual cells
                   style={{
                     backgroundColor: cell ? nextPiece.color : EMPTY_CELL_COLOR,
-                    borderColor: cell ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.05)',
+                    // Removed borderColor style from individual cells
                     boxShadow: cell ? 'inset 0.5px 0.5px 1px rgba(0,0,0,0.2)' : 'none',
-                    borderRadius: '0.5px',
+                    // Removed sub-pixel borderRadius from individual cells
                   }}
                 />
               ))
