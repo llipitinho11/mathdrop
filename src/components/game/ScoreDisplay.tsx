@@ -14,19 +14,19 @@ const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ score, level, linesCleared,
   return (
     <div className="p-4 space-y-4 text-foreground bg-card rounded-lg shadow-xl border" style={{borderColor: BORDER_COLOR}}>
       <div>
-        <h3 className="text-lg font-semibold">Score</h3>
+        <h3 className="text-lg font-semibold">Pontuação</h3>
         <p className="text-2xl text-accent font-bold">{score}</p>
       </div>
       <div>
-        <h3 className="text-lg font-semibold">Level</h3>
+        <h3 className="text-lg font-semibold">Nível</h3>
         <p className="text-2xl text-accent font-bold">{level}</p>
       </div>
       <div>
-        <h3 className="text-lg font-semibold">Lines</h3>
+        <h3 className="text-lg font-semibold">Linhas</h3>
         <p className="text-2xl text-accent font-bold">{linesCleared}</p>
       </div>
       <div>
-        <h3 className="text-lg font-semibold">Next</h3>
+        <h3 className="text-lg font-semibold">Próximo</h3>
         {nextPiece && (
           <div
             className="grid border rounded"

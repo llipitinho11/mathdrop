@@ -23,14 +23,14 @@ const GameOverModal: React.FC<GameOverModalProps> = ({ isOpen, score, onRestart 
     <AlertDialog open={isOpen}>
       <AlertDialogContent className="bg-card border-border">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-3xl font-bold text-center text-primary">Game Over!</AlertDialogTitle>
+          <AlertDialogTitle className="text-3xl font-bold text-center text-primary">Fim de Jogo!</AlertDialogTitle>
           <AlertDialogDescription className="text-center text-lg text-foreground/80 pt-2">
-            Your final score is: <strong className="text-accent">{score}</strong>
+            Sua pontuação final é: <strong className="text-accent">{score}</strong>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter className="mt-4">
           <Button onClick={onRestart} className="w-full h-12 text-lg bg-primary hover:bg-primary/90">
-            Play Again
+            Jogue Novamente
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>

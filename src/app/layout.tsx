@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster'; // Ensure Toaster is imported
 
 export const metadata: Metadata = {
-  title: 'Block Drop',
-  description: 'A classic falling block puzzle game by Firebase Studio',
+  title: 'Mathdrop',
+  description: 'Matemática nos Jogos Virtuais',
 };
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="pt-BR" className="dark">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />

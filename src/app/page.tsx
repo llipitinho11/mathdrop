@@ -43,7 +43,7 @@ export default function BlockDropPage() {
       <Toaster />
       <header className="mb-8 text-center">
         <h1 className="text-5xl font-bold text-primary tracking-tight">Block Drop</h1>
-        <p className="text-accent text-lg mt-1">A classic falling block puzzle game.</p>
+        <p className="text-accent text-lg mt-1">Um clássico jogo de quebra-cabeça de blocos cadentes.</p>
       </header>
 
       <div className="flex flex-col lg:flex-row items-start justify-center gap-6 w-full max-w-4xl">
@@ -55,7 +55,7 @@ export default function BlockDropPage() {
           <ScoreDisplay score={score} level={level} linesCleared={linesClearedTotal} nextPiece={nextPiece} />
           { (isPaused && !gameOver && !currentPiece) && ( // Show start button if game hasn't truly started
              <Button onClick={startGame} className="w-full h-14 text-lg bg-accent hover:bg-accent/90 text-accent-foreground">
-                Start Game
+                Iniciar Jogo
             </Button>
           )}
           <GameControls
@@ -74,8 +74,8 @@ export default function BlockDropPage() {
       {gameOver && <GameOverModal isOpen={gameOver} score={score} onRestart={startGame} />}
 
       <footer className="mt-12 text-center text-sm text-muted-foreground">
-        <p>Controls: Arrow keys to move & rotate. Space to hard drop. P to pause.</p>
-        <p>&copy; {new Date().getFullYear()} Block Drop. Built with Next.js & Tailwind CSS.</p>
+        <p>Feito para o TCS</p>
+        <p>&copy; {new Date().getFullYear()} Mathdrop.</p>
       </footer>
     </div>
   );

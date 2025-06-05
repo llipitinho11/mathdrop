@@ -31,7 +31,7 @@ const GameControls: React.FC<GameControlsProps> = ({
         <Button
           onClick={onMoveLeft}
           disabled={isPaused || gameOver}
-          aria-label="Move Left"
+          aria-label="Mover para Esquerda"
           className={commonButtonClass}
           variant="secondary"
         >
@@ -40,7 +40,7 @@ const GameControls: React.FC<GameControlsProps> = ({
         <Button
           onClick={onRotate}
           disabled={isPaused || gameOver}
-          aria-label="Rotate"
+          aria-label="Girar"
           className={commonButtonClass}
           variant="secondary"
         >
@@ -49,7 +49,7 @@ const GameControls: React.FC<GameControlsProps> = ({
         <Button
           onClick={onMoveRight}
           disabled={isPaused || gameOver}
-          aria-label="Move Right"
+          aria-label="Mover para Direita"
           className={commonButtonClass}
           variant="secondary"
         >
@@ -60,7 +60,7 @@ const GameControls: React.FC<GameControlsProps> = ({
         <Button
           onClick={onSoftDrop}
           disabled={isPaused || gameOver}
-          aria-label="Soft Drop"
+          aria-label="Descida Suave"
           className={commonButtonClass}
           variant="secondary"
         >
@@ -69,7 +69,7 @@ const GameControls: React.FC<GameControlsProps> = ({
         <Button
           onClick={onHardDrop}
           disabled={isPaused || gameOver}
-          aria-label="Hard Drop"
+          aria-label="Descida Rápida"
           className={commonButtonClass}
           variant="secondary"
         >
@@ -79,11 +79,11 @@ const GameControls: React.FC<GameControlsProps> = ({
        <Button
         onClick={onTogglePause}
         disabled={gameOver}
-        aria-label={isPaused ? "Play" : "Pause"}
+        aria-label={isPaused ? "Jogar" : "Pausar"}
         className={`${commonButtonClass} bg-primary hover:bg-primary/90`}
       >
         {isPaused ? <Play size={iconSize} /> : <Pause size={iconSize} />}
-        <span className="ml-2">{isPaused && !gameOver ? "Play" : "Pause"}</span>
+        <span className="ml-2">{isPaused && !gameOver ? "Jogar" : "Pausar"}</span>
       </Button>
     </div>
   );
