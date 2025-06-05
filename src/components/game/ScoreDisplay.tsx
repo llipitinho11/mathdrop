@@ -17,11 +17,11 @@ const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ score, level, linesCleared,
         <h3 className="text-lg font-semibold">Pontuação</h3>
         <p className="text-2xl text-accent font-bold">{score}</p>
       </div>
-      <div>
+      <div className="hidden lg:block">
         <h3 className="text-lg font-semibold">Nível</h3>
         <p className="text-2xl text-accent font-bold">{level}</p>
       </div>
-      <div>
+      <div className="hidden lg:block">
         <h3 className="text-lg font-semibold">Linhas</h3>
         <p className="text-2xl text-accent font-bold">{linesCleared}</p>
       </div>
