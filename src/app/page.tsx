@@ -5,10 +5,12 @@ import GameBoard from '@/components/game/GameBoard';
 import GameControls from '@/components/game/GameControls';
 import ScoreDisplay from '@/components/game/ScoreDisplay';
 import GameOverModal from '@/components/game/GameOverModal';
-import { useGame } from '@/hooks/useGame';
+import { useGame, type GameMode } from '@/hooks/useGame';
 import { Button } from '@/components/ui/button';
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Label } from "@/components/ui/label"
 import { Toaster } from '@/components/ui/toaster';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function BlockDropPage() {
   const {
@@ -20,7 +22,10 @@ export default function BlockDropPage() {
     linesClearedTotal,
     gameOver,
     isPaused,
+    activeGameMode,
+    timeLeft,
     startGame,
+    restartGame,
     moveLeft,
     moveRight,
     rotate,
@@ -29,12 +34,13 @@ export default function BlockDropPage() {
     togglePause,
   } = useGame();
 
+  const [selectedMode, setSelectedMode] = useState<GameMode>('solo');
+  
+  const handleStartGame = () => {
+    startGame({ mode: selectedMode });
+  };
 
-  useEffect(() => {
-    // This effect ensures that if the game initializes in a paused state (e.g. on first load),
-    // the user has a clear way to start.
-    // startGame() will set isPaused to false.
-  }, []);
+  const isGameEffectivelyOverOrNotStarted = gameOver || !activeGameMode;
 
 
   return (
@@ -45,37 +51,62 @@ export default function BlockDropPage() {
         <p className="text-accent text-base sm:text-lg mt-1">Matemática nos Jogos Virtuais</p>
       </header>
 
-      <div className="flex flex-row items-start justify-center gap-x-2 sm:gap-x-4 w-full max-w-xs sm:max-w-sm md:max-w-lg lg:max-w-2xl xl:max-w-3xl mx-auto">
-        {/* GameBoard Wrapper */}
-        <div className="flex-shrink-0"> 
-          <GameBoard board={board} currentPiece={currentPiece} />
+      {isGameEffectivelyOverOrNotStarted && !currentPiece && (
+        <div className="mb-6 p-6 bg-card rounded-lg shadow-xl border border-border">
+          <h2 className="text-xl font-semibold text-center mb-4 text-primary">Escolha o Modo de Jogo</h2>
+          <RadioGroup defaultValue="solo" onValueChange={(value) => setSelectedMode(value as GameMode)} className="space-y-3 mb-6">
+            <div className="flex items-center space-x-3 p-3 bg-background/50 rounded-md hover:bg-background/70 transition-colors">
+              <RadioGroupItem value="solo" id="mode-solo" className="border-primary text-primary focus:ring-primary"/>
+              <Label htmlFor="mode-solo" className="text-lg cursor-pointer">Modo Solo Clássico</Label>
+            </div>
+            <div className="flex items-center space-x-3 p-3 bg-background/50 rounded-md hover:bg-background/70 transition-colors">
+              <RadioGroupItem value="duo" id="mode-duo" className="border-primary text-primary focus:ring-primary"/>
+              <Label htmlFor="mode-duo" className="text-lg cursor-pointer">Modo Competição (30s)</Label>
+            </div>
+          </RadioGroup>
+          <Button 
+            onClick={handleStartGame} 
+            className="w-full h-12 text-lg bg-accent hover:bg-accent/90 text-accent-foreground shadow-md transform active:scale-95 transition-transform"
+          >
+            Iniciar Jogo
+          </Button>
         </div>
+      )}
 
-        {/* Sidebar: ScoreDisplay + GameControls */}
-        <div className="flex flex-col space-y-1 sm:space-y-2 md:space-y-3 lg:space-y-4 flex-grow min-w-0"> 
-          <ScoreDisplay score={score} level={level} linesCleared={linesClearedTotal} nextPiece={nextPiece} />
-          { (isPaused && !gameOver && !currentPiece) && ( // Show start button if game hasn't truly started
-             <Button 
-                onClick={startGame} 
-                className="w-full h-9 text-xs sm:h-10 sm:text-sm md:text-base bg-accent hover:bg-accent/90 text-accent-foreground"
-              >
-                Iniciar Jogo
-            </Button>
-          )}
-          <GameControls
-            onMoveLeft={moveLeft}
-            onMoveRight={moveRight}
-            onRotate={rotate}
-            onSoftDrop={softDrop}
-            onHardDrop={hardDrop}
-            onTogglePause={togglePause}
-            isPaused={isPaused}
-            gameOver={gameOver}
-          />
+      {!isGameEffectivelyOverOrNotStarted && currentPiece && (
+        <div className="flex flex-col items-center">
+          <div className="flex flex-row items-start justify-center gap-x-1 sm:gap-x-2 w-full max-w-[200px] sm:max-w-[280px] md:max-w-xs lg:max-w-sm xl:max-w-md mx-auto">
+            <div className="flex-shrink-0"> 
+              <GameBoard board={board} currentPiece={currentPiece} />
+            </div>
+            <div className="flex flex-col space-y-1 sm:space-y-2 md:space-y-3 lg:space-y-4 flex-grow min-w-0"> 
+              <ScoreDisplay 
+                score={score} 
+                level={level} 
+                linesCleared={linesClearedTotal} 
+                nextPiece={nextPiece}
+                gameMode={activeGameMode}
+                timeLeft={timeLeft}
+              />
+            </div>
+          </div>
+          <div className="mt-2 sm:mt-3 md:mt-4 w-full max-w-[200px] sm:max-w-[280px] md:max-w-xs lg:max-w-sm xl:max-w-md">
+            <GameControls
+              onMoveLeft={moveLeft}
+              onMoveRight={moveRight}
+              onRotate={rotate}
+              onSoftDrop={softDrop}
+              onHardDrop={hardDrop}
+              onTogglePause={togglePause}
+              isPaused={isPaused}
+              gameOver={gameOver}
+              gameActive={!!activeGameMode && !!currentPiece && !gameOver}
+            />
+          </div>
         </div>
-      </div>
+      )}
       
-      {gameOver && <GameOverModal isOpen={gameOver} score={score} onRestart={startGame} />}
+      {gameOver && activeGameMode && <GameOverModal isOpen={gameOver} score={score} onRestart={restartGame} gameMode={activeGameMode} />}
 
       <footer className="mt-6 sm:mt-8 md:mt-12 text-center text-xs sm:text-sm text-muted-foreground">
         <p>Feito para o TCS</p>
