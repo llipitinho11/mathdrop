@@ -42,8 +42,8 @@ export default function BlockDropPage() {
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-background text-foreground font-body">
       <Toaster />
       <header className="mb-8 text-center">
-        <h1 className="text-5xl font-bold text-primary tracking-tight">Block Drop</h1>
-        <p className="text-accent text-lg mt-1">Um clássico jogo de quebra-cabeça de blocos cadentes.</p>
+        <h1 className="text-5xl font-bold text-primary tracking-tight">MathDrop</h1>
+        <p className="text-accent text-lg mt-1">Matemática nos Jogos Virtuais</p>
       </header>
 
       <div className="flex flex-col lg:flex-row items-start justify-center gap-6 w-full max-w-4xl">
