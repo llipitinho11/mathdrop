@@ -1,3 +1,4 @@
+
 import type { Board, Piece } from '@/lib/game';
 import { BOARD_WIDTH, BOARD_HEIGHT, EMPTY_CELL_COLOR, BORDER_COLOR } from '@/lib/constants';
 
@@ -25,7 +26,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ board, currentPiece }) => {
     });
   }
 
-  const cellSize = 'min(2.5vw, 24px)'; // Responsive cell size
+  const cellSize = 'min(5vw, 20px)'; // Responsive cell size: 5vw or 20px, whichever is smaller
 
   return (
     <div
@@ -50,8 +51,8 @@ const GameBoard: React.FC<GameBoardProps> = ({ board, currentPiece }) => {
               backgroundColor: cell ? cell : EMPTY_CELL_COLOR,
               borderColor: cell ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.05)', // Darker border for filled, lighter for empty
               // Add a slight inset shadow to blocks for 3D feel
-              boxShadow: cell ? 'inset 2px 2px 4px rgba(0,0,0,0.2), inset -1px -1px 2px rgba(255,255,255,0.1)' : 'none',
-              borderRadius: '2px', // Slightly rounded corners for blocks
+              boxShadow: cell ? 'inset 1px 1px 2px rgba(0,0,0,0.15), inset -0.5px -0.5px 1px rgba(255,255,255,0.05)' : 'none',
+              borderRadius: '1px', // Slightly rounded corners for blocks
             }}
           />
         ))

@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, ArrowRight, RotateCw, ArrowDown, ChevronsDown, Play, Pause } from 'lucide-react';
 
@@ -22,12 +23,12 @@ const GameControls: React.FC<GameControlsProps> = ({
   isPaused,
   gameOver
 }) => {
-  const commonButtonClass = "w-full h-14 text-lg flex-1 transition-all transform active:scale-95";
-  const iconSize = 28;
+  const commonButtonClass = "w-full h-9 text-sm sm:h-10 sm:text-base md:h-11 md:text-lg lg:h-12 lg:text-xl flex-1 transition-all transform active:scale-95";
+  const iconSize = 18; // sm:20 md:22 lg:24 - Using a smaller fixed size for now
 
   return (
-    <div className="w-full max-w-xs space-y-2">
-      <div className="flex space-x-2">
+    <div className="w-full max-w-xs space-y-1 sm:space-y-2">
+      <div className="flex space-x-1 sm:space-x-2">
         <Button
           onClick={onMoveLeft}
           disabled={isPaused || gameOver}
@@ -56,7 +57,7 @@ const GameControls: React.FC<GameControlsProps> = ({
           <ArrowRight size={iconSize} />
         </Button>
       </div>
-      <div className="flex space-x-2">
+      <div className="flex space-x-1 sm:space-x-2">
         <Button
           onClick={onSoftDrop}
           disabled={isPaused || gameOver}
@@ -83,7 +84,7 @@ const GameControls: React.FC<GameControlsProps> = ({
         className={`${commonButtonClass} bg-primary hover:bg-primary/90`}
       >
         {isPaused ? <Play size={iconSize} /> : <Pause size={iconSize} />}
-        <span className="ml-2">{isPaused && !gameOver ? "Jogar" : "Pausar"}</span>
+        <span className="ml-1 text-xs sm:ml-2 sm:text-sm md:text-base">{isPaused && !gameOver ? "Jogar" : "Pausar"}</span>
       </Button>
     </div>
   );
